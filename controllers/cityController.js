@@ -1,9 +1,30 @@
 const City = require("../models/City");
 
-// Get all cities
 exports.getAllCities = async (req, res) => {
   try {
-    const cities = await City.find();
+    const { limit, city, minPrice, maxPrice } = req.query;
+
+    // Build a MongoDB query object
+    let query = {};
+
+    if (city) {
+      // Case-insensitive exact match
+      query.city = { $regex: new RegExp(`^${city}$`, "i") };
+    }
+
+    if (minPrice) {
+      query.price = query.price || {};
+      query.price.$gte = parseFloat(minPrice);
+    }
+
+    if (maxPrice) {
+      query.price = query.price || {};
+      query.price.$lte = parseFloat(maxPrice);
+    }
+
+    // Execute query with optional limit
+    const cities = await City.find(query).limit(parseInt(limit) || 0);
+
     res.json(cities);
   } catch (err) {
     console.error("❌ Failed to fetch cities:", err);
