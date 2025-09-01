@@ -1,0 +1,62 @@
+const dotenv = require("dotenv");
+const { MongoClient } = require("mongodb");
+
+dotenv.config();
+
+const client = new MongoClient(process.env.MONGO_URI);
+
+const citiesData = [
+  {
+    image: "https://images.pexels.com/photos/1475938/pexels-photo-1475938.jpeg",
+    city: "Riga",
+    price: 890000,
+    description: "One of the highest ranked neighborhood project near Riga"
+  },
+  {
+    image: "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
+    city: "Paris",
+    price: 1200000,
+    description: "A beautiful apartment in the heart of Paris"
+  },
+  {
+    image: "https://images.pexels.com/photos/462331/pexels-photo-462331.jpeg",
+    city: "New York",
+    price: 1500000,
+    description: "Luxury condo with a stunning view of Manhattan"
+  },
+  {
+    image: "https://images.pexels.com/photos/356830/pexels-photo-356830.jpeg",
+    city: "Tokyo",
+    price: 950000,
+    description: "Modern apartment located in the bustling city of Tokyo"
+  },
+  {
+    image: "https://images.pexels.com/photos/210617/pexels-photo-210617.jpeg",
+    city: "Sydney",
+    price: 1100000,
+    description: "Spacious home near the iconic Sydney Opera House"
+  },
+  {
+    image: "https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg",
+    city: "Laris",
+    price: 1200,
+    description: "Beautiful city"
+  }
+];
+
+async function seed() {
+  try {
+    await client.connect();
+    const db = client.db("CitiesDB");
+    const cities = db.collection("cities");
+
+    await cities.insertMany(citiesData);
+    console.log("✅ Cities inserted!");
+  } catch (err) {
+    console.error("❌ Error inserting cities:", err);
+  } finally {
+    await client.close();
+  }
+}
+
+seed();
