@@ -8,4 +8,7 @@ router.get("/", cityController.getAllCities);
 // POST /api/cities
 router.post("/", cityController.addCity);
 
+// DELETE /api/cities/:id
+router.delete('/:id', cityController.deleteCity);
+
 module.exports = router;
