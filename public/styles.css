@@ -1,0 +1,111 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: darkslategrey;
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#cities-list-container {
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.cities-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-around;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.city-item {
+  background-color: lightslategray;
+  border-radius: 1rem;
+  padding: 1rem;
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.city-item .image-container {
+  height: 200px;
+  overflow: hidden;
+} 
+
+.city-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.city-item span {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.city-item strong {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.city-item:last-child {
+  border-bottom: none;
+}
+
+.city-item button {
+  margin-top: 10px;
+}
+
+.city-name {
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+
+}
+
+.city-temperature {
+  font-style: italic;
+}
+
+.delete-city {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: auto;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f3f3f3 25%, #e2e2e2 50%, #f3f3f3 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.2s infinite linear;
+    border-radius: 8px;
+    min-height: 120px;
+    margin-bottom: 16px;
+}
+
+.error-msg {
+  color: red;
+  font-weight: bold;
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
